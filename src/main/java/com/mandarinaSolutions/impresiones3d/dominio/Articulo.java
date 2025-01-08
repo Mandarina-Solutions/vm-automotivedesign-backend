@@ -1,12 +1,12 @@
 package com.mandarinaSolutions.impresiones3d.dominio;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
 
@@ -36,6 +36,8 @@ public class Articulo {
     @Column
     private String imagen;
 
+//    @ManyToOne
+//    @JoinColumn(name = "categoria", referencedColumnName = "id") 
     @Column
     private Integer categoria;
     
