@@ -12,13 +12,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.mandarinaSolutions.impresiones3d.dominio.Articulo;
-import com.mandarinaSolutions.impresiones3d.repository.Repository;
+import com.mandarinaSolutions.impresiones3d.repository.RepositoryArticulo;
 
 @RestController
-public class Controller {
+public class ControllerArticulo {
 	
 	@Autowired
-	private Repository repo;
+	private RepositoryArticulo repo;
 	
 	@GetMapping("articulos")
 	public List<Articulo> getArticulos() {
