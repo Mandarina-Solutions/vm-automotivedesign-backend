@@ -1,3 +1,4 @@
+
 package com.mandarinaSolutions.impresiones3d.dominio;
 
 import jakarta.persistence.Column;
@@ -15,9 +16,7 @@ import lombok.Data;
 @Table(name = "articulos")
 public class Articulo {
 
-  
-
-	@Id
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
@@ -36,72 +35,69 @@ public class Articulo {
     @Column
     private String imagen;
 
-//    @ManyToOne
-//    @JoinColumn(name = "categoria", referencedColumnName = "id") 
-    @Column
-    private Integer categoria;
-    
-    
+    @ManyToOne
+    @JoinColumn(name = "categoria", referencedColumnName = "id")
+    private Categoria categoria;
+
     public Integer getId() {
-  		return id;
-  	}
+        return id;
+    }
 
-  	public void setId(Integer id) {
-  		this.id = id;
-  	}
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-  	public String getDescripcion() {
-  		return descripcion;
-  	}
+    public String getDescripcion() {
+        return descripcion;
+    }
 
-  	public void setDescripcion(String descripcion) {
-  		this.descripcion = descripcion;
-  	}
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
 
-  	public Double getPrecio() {
-  		return precio;
-  	}
+    public Double getPrecio() {
+        return precio;
+    }
 
-  	public void setPrecio(Double precio) {
-  		this.precio = precio;
-  	}
+    public void setPrecio(Double precio) {
+        this.precio = precio;
+    }
 
-  	public String getTitulo() {
-  		return titulo;
-  	}
+    public String getTitulo() {
+        return titulo;
+    }
 
-  	public void setTitulo(String titulo) {
-  		this.titulo = titulo;
-  	}
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
 
-  	public String getDimension() {
-  		return dimension;
-  	}
+    public String getDimension() {
+        return dimension;
+    }
 
-  	public void setDimension(String dimension) {
-  		this.dimension = dimension;
-  	}
+    public void setDimension(String dimension) {
+        this.dimension = dimension;
+    }
 
-  	public String getImagen() {
-  		return imagen;
-  	}
+    public String getImagen() {
+        return imagen;
+    }
 
-  	public void setImagen(String imagen) {
-  		this.imagen = imagen;
-  	}
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
+    }
 
-  	public Integer getCategoria() {
-  		return categoria;
-  	}
+    public Categoria getCategoria() {
+        return categoria;
+    }
 
-  	public void setCategoria(Integer categoria) {
-  		this.categoria = categoria;
-  	}
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
+    }
 
-  	@Override
-  	public String toString() {
-  		return "Articulo [id=" + id + ", descripcion=" + descripcion + ", precio=" + precio + ", titulo=" + titulo
-  				+ ", dimension=" + dimension + ", imagen=" + imagen + ", categoria=" + categoria + "]";
-  	}
-    
+    @Override
+    public String toString() {
+        return "Articulo [id=" + id + ", descripcion=" + descripcion + ", precio=" + precio + ", titulo=" + titulo
+                + ", dimension=" + dimension + ", imagen=" + imagen + ", categoria=" + categoria + "]";
+    }
 }
