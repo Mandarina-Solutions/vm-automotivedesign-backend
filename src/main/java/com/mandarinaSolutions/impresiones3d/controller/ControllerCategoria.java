@@ -12,39 +12,39 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.mandarinaSolutions.impresiones3d.dominio.Categoria;
-import com.mandarinaSolutions.impresiones3d.repository.RepositoryCategoria;
+import com.mandarinaSolutions.impresiones3d.services.CategoriaService;
 
 @RestController
 public class ControllerCategoria {
 	
 	@Autowired
-	private RepositoryCategoria repo;
+	private CategoriaService service;
 	
 	@GetMapping("categorias")
-	public List<Categoria> getCategorias() {
-		return repo.findAll();
+	public List<Categoria> obtenerCategorias() {
+		return service.getCategorias();
 	}
 	
 	@GetMapping("categorias/{id}")
-	public Categoria getCategoria(@PathVariable Integer id) {
-		return repo.findById(id).get();
+	public Categoria obtenerCategoria(@PathVariable Integer id) {
+		return service.getCategoria(id);
 	}
 	
 	@PostMapping("crearCategoria")
-	public void addCategoria(@RequestBody Categoria categoria) {
-		System.out.println(categoria);
-		repo.save(categoria);
+	public void crearCategoria(@RequestBody Categoria categoria) {
+		service.addCategoria(categoria);
+	
 	}
 	
 	@DeleteMapping("borrarCategoria/{id}")
-	public void deleteCategoria(@PathVariable Integer id) {
-		repo.deleteById(id);
+	public void eliminarCategoria(@PathVariable Integer id) {
+		service.deleteCategoria(id);
 	}
 	
 	@PutMapping("actualizarCategoria")
 	//	logica de actualizar
-	public void updateCategoria(@RequestBody Categoria categoria) {
-		repo.save(categoria);
+	public void actualizarCategoria(@RequestBody Categoria categoria) {
+		service.updateCategoria(categoria);
 	}
 
 }

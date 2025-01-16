@@ -12,39 +12,38 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.mandarinaSolutions.impresiones3d.dominio.Articulo;
-import com.mandarinaSolutions.impresiones3d.repository.RepositoryArticulo;
+import com.mandarinaSolutions.impresiones3d.services.ArticuloService;
 
 @RestController
 public class ControllerArticulo {
 	
 	@Autowired
-	private RepositoryArticulo repo;
+	private ArticuloService service;
 	
 	@GetMapping("articulos")
-	public List<Articulo> getArticulos() {
-		return repo.findAll();
+	public List<Articulo> obtenerArticulos() {
+		return service.getArticulos();
 	}
 	
 	@GetMapping("articulos/{id}")
-	public Articulo getArticulo(@PathVariable Integer id) {
-		return repo.findById(id).get();
+	public Articulo obtenerArticulo(@PathVariable Integer id) {
+		return service.getArticulo(id);
 	}
 	
 	@PostMapping("crearArticulo")
-	public void addArticulo(@RequestBody Articulo articulo) {
-		System.out.println(articulo);
-		repo.save(articulo);
+	public void crearArticulo(@RequestBody Articulo articulo) {
+		service.addArticulo(articulo);
 	}
 	
 	@DeleteMapping("borrarArticulo/{id}")
-	public void deleteArticulo(@PathVariable Integer id) {
-		repo.deleteById(id);
+	public void eliminarArticulo(@PathVariable Integer id) {
+		service.deleteArticulo(id);
 	}
 	
 	@PutMapping("actualizarArticulo")
 //	logica de actualizar
-	public void updateArticulo(@RequestBody Articulo articulo) {
-		repo.save(articulo);
+	public void actualizarArticulo(@RequestBody Articulo articulo) {
+		service.updateArticulo(articulo);
 	}
 	
 	
