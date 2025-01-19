@@ -12,8 +12,8 @@ import lombok.Setter;
 
 @Entity
 @Data
-@Table(name = "categoria")
-public class Categoria {
+@Table(name = "color")
+public class Color {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,10 +26,20 @@ public class Categoria {
 	
 	@Column
 	@Getter @Setter
+	public String hex_value;
+	
+	@Column
+	@Getter @Setter
 	public String extra;
-
+	
 	@Override
 	public String toString() {
-		return "Categoria [id=" + id + ", nombre=" + detalle + ", extra="+ extra + "]";
+		return "Color "+
+				"[id=" + id +
+				", detalle=" + detalle +
+				", hex_value=" + hex_value +
+				", extra=" + extra +
+				"]";
 	}	
+
 }

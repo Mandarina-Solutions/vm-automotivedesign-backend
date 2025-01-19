@@ -9,95 +9,73 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import lombok.Data;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
-@Data
-@Table(name = "articulos")
+
+@Table(name = "articulo")
 public class Articulo {
 
+	//	LEER: 
+	//	Los getters y setter deben estar en public si se usa Lombok.
+	//	
+	
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-
-    @Column
-    private String descripcion;
-
-    @Column
-    private Double precio;
-
-    @Column
-    private String titulo;
-
-    @Column
-    private String dimension;
-
-    @Column
-    private String imagen;
+    @Getter @Setter
+    public Integer id;
 
     @ManyToOne
-    @JoinColumn(name = "categoria", referencedColumnName = "id")
-    private Categoria categoria;
+    @JoinColumn(name = "id_categoria", referencedColumnName = "id")
+    @Getter @Setter
+    public Categoria id_categoria;
+     
+    @ManyToOne
+    @JoinColumn(name = "id_color", referencedColumnName = "id")
+    @Getter @Setter
+    public Color id_color;
+    
+    @Column
+    @Getter @Setter
+    public String titulo;
 
-    public Integer getId() {
-        return id;
-    }
+    @Column
+    @Getter @Setter
+    public String detalle;
+    
+    @Column
+    @Getter @Setter
+    public String imagen_1;
+    
+    @Column
+    @Getter @Setter
+    public String imagen_2;
+    
+    @Column
+    @Getter @Setter
+    public String imagen_3;
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
-    public Double getPrecio() {
-        return precio;
-    }
-
-    public void setPrecio(Double precio) {
-        this.precio = precio;
-    }
-
-    public String getTitulo() {
-        return titulo;
-    }
-
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
-    }
-
-    public String getDimension() {
-        return dimension;
-    }
-
-    public void setDimension(String dimension) {
-        this.dimension = dimension;
-    }
-
-    public String getImagen() {
-        return imagen;
-    }
-
-    public void setImagen(String imagen) {
-        this.imagen = imagen;
-    }
-
-    public Categoria getCategoria() {
-        return categoria;
-    }
-
-    public void setCategoria(Categoria categoria) {
-        this.categoria = categoria;
-    }
-
-    @Override
-    public String toString() {
-        return "Articulo [id=" + id + ", descripcion=" + descripcion + ", precio=" + precio + ", titulo=" + titulo
-                + ", dimension=" + dimension + ", imagen=" + imagen + ", categoria=" + categoria + "]";
-    }
+    @Column
+    @Getter @Setter
+    public Double precio_lista;
+    
+    @Column
+    @Getter @Setter
+    public Double descuento;
+    
+    @Column
+    @Getter(AccessLevel.PUBLIC) @Setter(AccessLevel.PUBLIC)
+    private String dimension_mm;
+    
+    
+//    public String getDimensiones_mm() {
+//    	return this.dimension_mm;
+//    }
+//    public void setDimensiones_mm(String newDim) {
+//    	this.dimension_mm = newDim;
+//    }
+    
 }
