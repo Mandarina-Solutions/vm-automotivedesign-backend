@@ -1,7 +1,7 @@
 package com.mandarinaSolutions.impresiones3d.controller;
 
 import java.util.List;
-
+import java.util.stream.Stream;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,8 +22,8 @@ public class ControllerArticulo {
 	
 	@GetMapping("articulos")
 	public List<Articulo> obtenerArticulos() {
-		return service.getArticulos();
-	}
+		return service.getAll();
+	};
 	
 	@GetMapping("articulos/{id}")
 	public Articulo obtenerArticulo(@PathVariable Integer id) {
@@ -37,7 +37,7 @@ public class ControllerArticulo {
 	
 	@DeleteMapping("borrarArticulo/{id}")
 	public void eliminarArticulo(@PathVariable Integer id) {
-		service.deleteArticulo(id);
+		service.deleteById(id);
 	}
 	
 	@PutMapping("actualizarArticulo")
@@ -46,7 +46,13 @@ public class ControllerArticulo {
 		service.updateArticulo(articulo);
 	}
 	
+	@GetMapping("mock")
+	public Articulo mock() {
+		return service.mock();
+	}
 	
-	
-	
+	@GetMapping("titulo")
+	public String titulo() {
+		return service.titulo();
+	}
 }

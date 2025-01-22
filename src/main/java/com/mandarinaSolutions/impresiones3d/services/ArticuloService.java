@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import com.mandarinaSolutions.impresiones3d.dominio.Articulo;
 import com.mandarinaSolutions.impresiones3d.repository.RepositoryArticulo;
@@ -15,7 +16,7 @@ public class ArticuloService {
 	@Autowired
 	private RepositoryArticulo repo;
 	
-	public List<Articulo> getArticulos() {
+	public List<Articulo> getAll() {
 		return repo.findAll();
 	}
 	
@@ -27,7 +28,7 @@ public class ArticuloService {
 		repo.save(articulo);
 	}
 	
-	public void deleteArticulo(Integer id) {
+	public void deleteById(Integer id) {
 		repo.deleteById(id);
 	}
 	
@@ -35,7 +36,11 @@ public class ArticuloService {
 		repo.save(articulo);
 	}
 	
+	public Articulo mock() {
+		return repo.articulosBasic();
+	}
 	
-	
-	
+	public String titulo() {
+		return repo.titulo();
+	}
 }

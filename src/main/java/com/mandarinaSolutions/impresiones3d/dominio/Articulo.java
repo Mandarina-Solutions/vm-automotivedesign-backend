@@ -1,6 +1,8 @@
 
 package com.mandarinaSolutions.impresiones3d.dominio;
 
+import java.util.Set;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -8,20 +10,18 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import lombok.AccessLevel;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-
 @Table(name = "articulo")
 public class Articulo {
 
 	//	LEER: 
 	//	Los getters y setter deben estar en public si se usa Lombok.
-	//	
+	//	Sino, usar setter y getter manopla en public. JPA no tiene acceso sino
 	
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,10 +33,9 @@ public class Articulo {
     @Getter @Setter
     public Categoria id_categoria;
      
-    @ManyToOne
-    @JoinColumn(name = "id_color", referencedColumnName = "id")
+    @OneToMany(mappedBy="articulo")
     @Getter @Setter
-    public Color id_color;
+    public Set<ArticuloColor> colores;
     
     @Column
     @Getter @Setter
@@ -67,15 +66,7 @@ public class Articulo {
     public Double descuento;
     
     @Column
-    @Getter(AccessLevel.PUBLIC) @Setter(AccessLevel.PUBLIC)
-    private String dimension_mm;
-    
-    
-//    public String getDimensiones_mm() {
-//    	return this.dimension_mm;
-//    }
-//    public void setDimensiones_mm(String newDim) {
-//    	this.dimension_mm = newDim;
-//    }
-    
+    @Getter @Setter
+    public String dimension_mm;
+        
 }
