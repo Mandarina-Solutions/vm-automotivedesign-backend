@@ -1,16 +1,21 @@
 
 package com.mandarinaSolutions.impresiones3d.dominio;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
@@ -18,10 +23,6 @@ import lombok.Setter;
 @Entity
 @Table(name = "articulo")
 public class Articulo {
-
-	//	LEER: 
-	//	Los getters y setter deben estar en public si se usa Lombok.
-	//	Sino, usar setter y getter manopla en public. JPA no tiene acceso sino
 	
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,11 +32,15 @@ public class Articulo {
     @ManyToOne
     @JoinColumn(name = "id_categoria", referencedColumnName = "id")
     @Getter @Setter
-    public Categoria id_categoria;
+    public Categoria categoria;
      
-    @OneToMany(mappedBy="articulo")
+    @ManyToMany
+    @JoinTable(name = "articulo_color",
+	    joinColumns = @JoinColumn(name = "id_articulo"),
+	    inverseJoinColumns = @JoinColumn(name = "id_color")
+    )
     @Getter @Setter
-    public Set<ArticuloColor> colores;
+    public Set<Color> colores =  new HashSet<>();
     
     @Column
     @Getter @Setter
@@ -68,5 +73,5 @@ public class Articulo {
     @Column
     @Getter @Setter
     public String dimension_mm;
-        
+            
 }

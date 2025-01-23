@@ -1,12 +1,14 @@
 package com.mandarinaSolutions.impresiones3d.services;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import com.mandarinaSolutions.impresiones3d.dominio.Articulo;
+import com.mandarinaSolutions.impresiones3d.dominio.Color;
 import com.mandarinaSolutions.impresiones3d.repository.RepositoryArticulo;
 
 
@@ -16,8 +18,8 @@ public class ArticuloService {
 	@Autowired
 	private RepositoryArticulo repo;
 	
-	public List<Articulo> getAll() {
-		return repo.findAll();
+	public Set<Articulo> getAll() {
+		return repo.getAll();
 	}
 	
 	public Articulo getArticulo(Integer id) {
@@ -36,8 +38,8 @@ public class ArticuloService {
 		repo.save(articulo);
 	}
 	
-	public Articulo mock() {
-		return repo.articulosBasic();
+	public Set<Articulo> mock() {
+		return repo.findArticuloWithColores();
 	}
 	
 	public String titulo() {
