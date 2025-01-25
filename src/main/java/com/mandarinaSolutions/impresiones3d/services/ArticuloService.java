@@ -1,5 +1,6 @@
 package com.mandarinaSolutions.impresiones3d.services;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -19,7 +20,8 @@ public class ArticuloService {
 	private RepositoryArticulo repo;
 	
 	public Set<Articulo> getAll() {
-		return repo.getAll();
+		HashSet<Articulo> resultadoToSet = new HashSet<Articulo>(repo.findAll());
+		return resultadoToSet;
 	}
 	
 	public Articulo getArticulo(Integer id) {
@@ -39,10 +41,8 @@ public class ArticuloService {
 	}
 	
 	public Set<Articulo> mock() {
-		return repo.findArticuloWithColores();
+		HashSet<Articulo> resultadoToSet = new HashSet<Articulo>(repo.findAll());
+		return resultadoToSet;
 	}
 	
-	public String titulo() {
-		return repo.titulo();
-	}
 }

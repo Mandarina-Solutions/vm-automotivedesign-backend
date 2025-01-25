@@ -1,15 +1,10 @@
 package com.mandarinaSolutions.impresiones3d.dominio;
 
-import java.util.List;
-import java.util.Set;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Data;
 import lombok.Getter;
@@ -25,28 +20,20 @@ public class Color {
 	@Getter @Setter
 	public Integer id;
 	
-	@Column
+	@Column(length=50)
 	@Getter @Setter
-	public String detalle;
+	public String nombre;
 	
-	@Column
+	@Column(length=6)
 	@Getter @Setter
 	public String hex_value;
-	
-	@Column
-	@Getter @Setter
-	public String extra;
-	
-	
-
 	
 	@Override
 	public String toString() {
 		return "Color "+
 				"[id=" + id +
-				", detalle=" + detalle +
+				", detalle=" + nombre +
 				", hex_value=" + hex_value +
-				", extra=" + extra +
 				"]";
 	}	
 

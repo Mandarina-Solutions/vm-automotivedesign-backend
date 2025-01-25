@@ -1,5 +1,7 @@
 package com.mandarinaSolutions.impresiones3d.dominio;
 
+import java.util.Set;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -20,16 +22,16 @@ public class Categoria {
 	@Getter @Setter
 	public Integer id;
 	
-	@Column
+	@Column(length=50)
 	@Getter @Setter
-	public String detalle;
+	public String nombre;
 	
 	@Column
 	@Getter @Setter
-	public String extra;
+	public Double descuento;
 
 	@Override
 	public String toString() {
-		return "Categoria [id=" + id + ", nombre=" + detalle + ", extra="+ extra + "]";
+		return "Categoria [id=" + id + ", nombre=" + nombre + "]";
 	}	
 }
