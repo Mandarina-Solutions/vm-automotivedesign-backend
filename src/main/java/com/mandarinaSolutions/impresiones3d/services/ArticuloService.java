@@ -1,15 +1,10 @@
 package com.mandarinaSolutions.impresiones3d.services;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
-
 import com.mandarinaSolutions.impresiones3d.dominio.Articulo;
-import com.mandarinaSolutions.impresiones3d.dominio.Color;
 import com.mandarinaSolutions.impresiones3d.repository.RepositoryArticulo;
 
 
@@ -24,8 +19,9 @@ public class ArticuloService {
 		return resultadoToSet;
 	}
 	
-	public Articulo getArticulo(Integer id) {
-		return repo.findById(id).get();
+	public Articulo articuloByID(Integer id) {
+		Articulo articulo = repo.findById(id).get();
+		return articulo;
 	}
 	
 	public void addArticulo(Articulo articulo) {
