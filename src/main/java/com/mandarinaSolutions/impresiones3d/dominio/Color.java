@@ -1,7 +1,5 @@
 package com.mandarinaSolutions.impresiones3d.dominio;
 
-import java.util.Set;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -14,8 +12,8 @@ import lombok.Setter;
 
 @Entity
 @Data
-@Table(name = "categoria")
-public class Categoria {
+@Table(name = "color")
+public class Color {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,12 +24,17 @@ public class Categoria {
 	@Getter @Setter
 	public String nombre;
 	
-	@Column
+	@Column(length=6)
 	@Getter @Setter
-	public Double descuento;
-
+	public String hex_value;
+	
 	@Override
 	public String toString() {
-		return "Categoria [id=" + id + ", nombre=" + nombre + "]";
+		return "Color "+
+				"[id=" + id +
+				", detalle=" + nombre +
+				", hex_value=" + hex_value +
+				"]";
 	}	
+
 }

@@ -1,103 +1,91 @@
 
 package com.mandarinaSolutions.impresiones3d.dominio;
 
+import java.util.HashSet;
+import java.util.Set;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.NamedEntityGraph;
 import jakarta.persistence.Table;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
-@Data
-@Table(name = "articulos")
+@Table(name = "articulo")
 public class Articulo {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Getter @Setter
+	public Integer id;
 
-    @Column
-    private String descripcion;
+	//CHEQUEAR EL <FetchType.EAGER>
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "articulo_categoria",
+		joinColumns = @JoinColumn(name = "id_articulo"),
+		inverseJoinColumns = @JoinColumn(name = "id_categoria")
+	)
+	@Getter @Setter
+	public Set<Categoria> categorias;
+	
+	//CHEQUEAR EL <FetchType.EAGER>
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "articulo_color",
+		joinColumns = @JoinColumn(name = "id_articulo"),
+		inverseJoinColumns = @JoinColumn(name = "id_color")
+	)
+	@Getter @Setter
+	public Set<Color> colores;
 
-    @Column
-    private Double precio;
+	@Column(length=50)
+	@Getter @Setter
+	public String titulo;
 
-    @Column
-    private String titulo;
+	@Column
+	@Getter @Setter
+	public String detalle;
 
-    @Column
-    private String dimension;
+	@Column(length=50)
+	@Getter @Setter
+	public String imagen_1;
 
-    @Column
-    private String imagen;
+	@Column(length=50)
+	@Getter @Setter
+	public String imagen_2;
 
-    @ManyToOne
-    @JoinColumn(name = "categoria", referencedColumnName = "id")
-    private Categoria categoria;
+	@Column(length=50)
+	@Getter @Setter
+	public String imagen_3;
 
-    public Integer getId() {
-        return id;
-    }
+	@Column(length=50)
+	@Getter @Setter
+	public String imagen_4;
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+	@Column(length=50)
+	@Getter @Setter
+	public String imagen_5;
 
-    public String getDescripcion() {
-        return descripcion;
-    }
+	@Column
+	@Getter @Setter
+	public Double precio_lista;
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
+	@Column
+	@Getter @Setter
+	public Double descuento;
 
-    public Double getPrecio() {
-        return precio;
-    }
+	@Column(length=50)
+	@Getter @Setter
+	public String dimension_mm;
 
-    public void setPrecio(Double precio) {
-        this.precio = precio;
-    }
+	@Column
+	@Getter @Setter
+	public Boolean disponible;
 
-    public String getTitulo() {
-        return titulo;
-    }
-
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
-    }
-
-    public String getDimension() {
-        return dimension;
-    }
-
-    public void setDimension(String dimension) {
-        this.dimension = dimension;
-    }
-
-    public String getImagen() {
-        return imagen;
-    }
-
-    public void setImagen(String imagen) {
-        this.imagen = imagen;
-    }
-
-    public Categoria getCategoria() {
-        return categoria;
-    }
-
-    public void setCategoria(Categoria categoria) {
-        this.categoria = categoria;
-    }
-
-    @Override
-    public String toString() {
-        return "Articulo [id=" + id + ", descripcion=" + descripcion + ", precio=" + precio + ", titulo=" + titulo
-                + ", dimension=" + dimension + ", imagen=" + imagen + ", categoria=" + categoria + "]";
-    }
 }
