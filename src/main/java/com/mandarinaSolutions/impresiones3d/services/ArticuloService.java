@@ -25,6 +25,7 @@ public class ArticuloService {
 	}
 	
 	public Articulo getArticulo(Integer id) {
+		System.out.println("id " + id);
 		return repo.findById(id).get();
 	}
 	

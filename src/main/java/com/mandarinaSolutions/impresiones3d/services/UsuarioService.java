@@ -22,4 +22,8 @@ public class UsuarioService {
     private boolean validarUsuario(UserDTO userDTO, Usuario usuario){
         return (userDTO.username.equals(usuario.getUsername()) && userDTO.password.equals(usuario.getPassword()));
     }
+
+    public boolean logout() {
+        return false;
+    }
 }
