@@ -1,8 +1,6 @@
 package com.mandarinaSolutions.impresiones3d.controller;
 
-import java.util.List;
 import java.util.Set;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -12,9 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.mandarinaSolutions.impresiones3d.dominio.Articulo;
-import com.mandarinaSolutions.impresiones3d.dominio.Color;
 import com.mandarinaSolutions.impresiones3d.services.ArticuloService;
 
 @RestController
@@ -31,7 +27,7 @@ public class ControllerArticulo {
 	
 	@GetMapping("articulos/{id}")
 	public Articulo obtenerArticulo(@PathVariable Integer id) {
-		return service.getArticulo(id);
+		return service.articuloByID(id);
 	}
 	
 	@PostMapping("crearArticulo")
