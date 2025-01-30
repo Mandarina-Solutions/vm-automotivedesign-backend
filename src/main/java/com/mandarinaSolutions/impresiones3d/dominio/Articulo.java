@@ -1,8 +1,29 @@
 
 package com.mandarinaSolutions.impresiones3d.dominio;
 
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
+
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
+import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.databind.JsonSerializable;
+import com.fasterxml.jackson.databind.SerializerProvider;
+import com.fasterxml.jackson.databind.jsontype.TypeSerializer;
+import com.mandarinaSolutions.impresiones3d.converter.ArticuloDimensionesConverter;
+import com.mandarinaSolutions.impresiones3d.converter.ArticuloImagenesConverter;
+
+import io.hypersistence.utils.hibernate.type.json.JsonType;
 import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -15,9 +36,10 @@ import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
+
 @Entity
 @Table(name = "articulo")
-public class Articulo {
+public class Articulo{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -46,29 +68,19 @@ public class Articulo {
 	@Getter @Setter
 	public String titulo;
 
-	@Column
+	@Column(length=255)
 	@Getter @Setter
 	public String detalle;
 
 	@Column(length=50)
 	@Getter @Setter
-	public String imagen_1;
+	public String imagen;
+	
 
-	@Column(length=50)
+	@Column
+	@Convert(converter=ArticuloImagenesConverter.class)
 	@Getter @Setter
-	public String imagen_2;
-
-	@Column(length=50)
-	@Getter @Setter
-	public String imagen_3;
-
-	@Column(length=50)
-	@Getter @Setter
-	public String imagen_4;
-
-	@Column(length=50)
-	@Getter @Setter
-	public String imagen_5;
+	public List<String> imagenes_extra;
 
 	@Column
 	@Getter @Setter
@@ -77,13 +89,16 @@ public class Articulo {
 	@Column
 	@Getter @Setter
 	public Double descuento;
-
-	@Column(length=50)
+	
+	@Column
+	@Convert(converter=ArticuloDimensionesConverter.class)
 	@Getter @Setter
-	public String dimension_mm;
+	public Map<String,String> dimensiones_mm;
 
 	@Column
 	@Getter @Setter
+	@JsonIgnore
 	public Boolean disponible;
+
 
 }

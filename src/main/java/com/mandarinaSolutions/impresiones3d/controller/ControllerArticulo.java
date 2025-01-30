@@ -1,6 +1,9 @@
 package com.mandarinaSolutions.impresiones3d.controller;
 
+import java.util.List;
 import java.util.Set;
+
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -10,6 +13,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.mandarinaSolutions.impresiones3d.DTO.ArticuloCarritoDTO;
 import com.mandarinaSolutions.impresiones3d.dominio.Articulo;
 import com.mandarinaSolutions.impresiones3d.services.ArticuloService;
 
@@ -20,35 +25,59 @@ public class ControllerArticulo {
 	@Autowired
 	private ArticuloService service;
 	
-	@GetMapping("articulos")
-	public Set<Articulo> obtenerArticulos() {
+	private static final String basePath = "articulos";
+	// //////////////////////////////////////////////
+	//GET`s	
+	// //////////////////////////////////////////////
+	@GetMapping(basePath)
+	public Set<Articulo> getArticulos() {
 		return service.getAll();
 	};
 	
-	@GetMapping("articulos/{id}")
-	public Articulo obtenerArticulo(@PathVariable Integer id) {
-		return service.articuloByID(id);
+	@GetMapping(basePath + "/{id}")
+	public Articulo getArticuloByID(@PathVariable Integer id) {
+		return service.getByID(id);
 	}
 	
-	@PostMapping("crearArticulo")
-	public void crearArticulo(@RequestBody Articulo articulo) {
-		service.addArticulo(articulo);
+	@GetMapping(basePath + "/carrito")
+	public List<ArticuloCarritoDTO> getCarrito(@RequestBody List<Integer> ids) {
+		return service.getCarrito(ids);
+	};
+	
+//	@GetMapping(basePath + "/mock/{id}")
+//	public Object mock(@PathVariable Integer id) {
+//		return service.mock(id);
+//	};
+	// //////////////////////////////////////////////
+	// POST`s	
+	// //////////////////////////////////////////////
+	//	falta agregregarle algun pathParam para chequear el logueo
+	@PostMapping(basePath + "/new")
+	public void newArticulo(@RequestBody Articulo articulo) {
+		service.newArticulo(articulo);
 	}
 	
-	@DeleteMapping("borrarArticulo/{id}")
-	public void eliminarArticulo(@PathVariable Integer id) {
-		service.deleteById(id);
+	// //////////////////////////////////////////////
+	// DELETE`s	
+	// //////////////////////////////////////////////
+	//	falta agregregarle algun pathParam para chequear el logueo
+	@DeleteMapping(basePath + "/delete/{id}")
+	public void deleteArticulo(@PathVariable Integer id) {
+		service.bajaFisica(id);
 	}
 	
-	@PutMapping("actualizarArticulo")
-//	logica de actualizar
-	public void actualizarArticulo(@RequestBody Articulo articulo) {
-		service.updateArticulo(articulo);
+	// //////////////////////////////////////////////
+	// PUT`s	
+	// //////////////////////////////////////////////
+	//	falta agregregarle algun pathParam para chequear el logueo
+	@PutMapping(basePath + "/update")
+	public void updateInfo(@RequestBody Articulo articulo) {
+		service.actualizar(articulo);
 	}
 	
-	@GetMapping("mock")
-	public Set<Articulo> mock() {
-		return service.mock();
+	@PutMapping(basePath + "/update/{id}")
+	public void updateDisponibilidad(@PathVariable Integer id) {
+		service.bajaLogica(id);
 	}
 	
 }
