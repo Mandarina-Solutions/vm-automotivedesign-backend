@@ -24,27 +24,5 @@ public class ControllerCategoria {
 	public List<Categoria> obtenerCategorias() {
 		return service.getCategorias();
 	}
-	
-	@GetMapping("categorias/{id}")
-	public Categoria obtenerCategoria(@PathVariable Integer id) {
-		return service.getCategoria(id);
-	}
-	
-	@PostMapping("crearCategoria")
-	public void crearCategoria(@RequestBody Categoria categoria) {
-		service.addCategoria(categoria);
-	
-	}
-	
-	@DeleteMapping("borrarCategoria/{id}")
-	public void eliminarCategoria(@PathVariable Integer id) {
-		service.deleteCategoria(id);
-	}
-	
-	@PutMapping("actualizarCategoria")
-	//	logica de actualizar
-	public void actualizarCategoria(@RequestBody Categoria categoria) {
-		service.updateCategoria(categoria);
-	}
 
 }

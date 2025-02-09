@@ -1,0 +1,193 @@
+{
+	"info": {
+		"_postman_id": "4468b8b7-7e5c-4240-a1dc-93d572445461",
+		"name": "VM-AUTOMOTIVEDESIGN JAVA",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "38654170"
+	},
+	"item": [
+		{
+			"name": "User cases",
+			"item": [
+				{
+					"name": "Articulos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/articulos"
+					},
+					"response": []
+				},
+				{
+					"name": "MOCK",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/articulos/mock2/4"
+					},
+					"response": []
+				},
+				{
+					"name": "Carrito",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[1,2,3]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/articulos/carrito"
+					},
+					"response": []
+				},
+				{
+					"name": "Detalle de articulo",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/articulos/10",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"articulos",
+								"10"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "2",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Admin cases",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"Id\":1,\n    \"username\":\"mandarina\",\n    \"password\":\"mandarina\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/login"
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar Articulo",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": "http://localhost:8080/articulos/update"
+					},
+					"response": []
+				},
+				{
+					"name": "Baja logica",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": "http://localhost:8080/articulos"
+					},
+					"response": []
+				},
+				{
+					"name": "Crear Articulo",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\":null,\n    \"categorias\": [\n        {\n            \"id\": 2,\n            \"nombre\": \"Utiles\"\n        },\n        {\n            \"id\": 4,\n            \"nombre\": \"Decoracion\"\n        }\n    ],\n    \"colores\": [\n        {\n            \"id\": 3,\n            \"nombre\": \"Black\",\n            \"hex_value\": \"000000\"\n        },\n        {\n            \"id\": 6,\n            \"nombre\": \"Gris oscuro\",\n            \"hex_value\": \"696969\"\n        }\n    ],\n    \"dimensiones_mm\": [\n        {\n            \"id\":10,\n            \"articulo_id\":10,\n            \"alto_mm\": 1,\n            \"ancho_mm\": 1,\n            \"profundidad_mm\": 1\n        }\n    ],\n    \"imagenes\": [\n        {   \n            \"id\":10,\n            \"articulo_id\":10,\n            \"path\": \"nuevo.jpeg\"\n        }\n    ],\n    \"titulo\": \"NUEVO\",\n    \"detalle\": \"NUEVO\",\n    \"precio_lista\": 2500.0,\n    \"descuento\": 2.5,\n    \"disponible\":true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/articulos/new"
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar Articulo",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "http://localhost:8080/articulos/delete/10"
+					},
+					"response": []
+				},
+				{
+					"name": "Articulos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/articulos"
+					},
+					"response": []
+				},
+				{
+					"name": "Detalle Articulo",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/articulos/?id=2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"articulos",
+								""
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "asd",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:8080/categorias"
+			},
+			"response": []
+		}
+	]
+}

@@ -21,15 +21,18 @@ public interface RepositoryArticulo extends JpaRepository<Articulo, Integer> {
 	//	Asi para cada entrada de la tabla	
 	@Override
 	@Query(value = ArticuloQuerys.DISPONIBLE)
-	@EntityGraph(attributePaths={"colores", "categorias"})
+	@EntityGraph(attributePaths={"colores", "categorias", "dimensiones_mm", "imagenes"})
 	List<Articulo> findAll();
 	
 	@Override
-	@EntityGraph(attributePaths={"colores", "categorias"})
+	@EntityGraph(attributePaths={"colores", "categorias", "dimensiones_mm", "imagenes"})
 	Optional<Articulo> findById(Integer id);
 	
 	@NativeQuery(value = ArticuloQuerys.CARRITO)
 	List<ArticuloCarritoDTO> getCarrito(List<Integer> ids);
+	
+	@NativeQuery(value = ArticuloQuerys.EXISTE_ARTICULO)
+	Integer existeArticulo(Integer idEntrante);
 	
 //	@Query("SELECT a FROM Articulo a JOIN FETCH a.colores JOIN FETCH a.categorias")
 //	Set<Articulo> getAll();

@@ -20,7 +20,8 @@ public class ArticuloImagenesConverter implements AttributeConverter<List<String
 	
 	@Override
 	public String convertToDatabaseColumn(List<String> dbData) {
-		return dbData.toString();
+		String jsonLikeString = "[\"" + String.join("\", \"", dbData) + "\"]";
+		return jsonLikeString;
 	}
 	
 	@Override

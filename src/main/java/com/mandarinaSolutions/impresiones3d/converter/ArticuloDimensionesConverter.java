@@ -1,9 +1,7 @@
 package com.mandarinaSolutions.impresiones3d.converter;
 
-import java.util.HashMap;
 import java.util.Map;
-
-import org.json.JSONObject;
+import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -18,7 +16,11 @@ public class ArticuloDimensionesConverter implements AttributeConverter<Map<Stri
 	
 	@Override
 	public String convertToDatabaseColumn(Map<String,String> dbData) {
-		return dbData.toString();
+//		"{\"small\": \"100x100x100\", \"medium\": \"200x200x200\"}"
+		String jsonLikeString = dbData.entrySet().stream()
+	            .map(entry -> "\"" + entry.getKey() + "\": \"" + entry.getValue() + "\"")
+	            .collect(Collectors.joining(", ", "{", "}"));
+		return jsonLikeString;
 	}
 	
 	@Override

@@ -1,29 +1,13 @@
 
 package com.mandarinaSolutions.impresiones3d.dominio;
 
-import java.io.IOException;
-import java.util.HashMap;
+
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
-
-import org.hibernate.annotations.JdbcTypeCode;
-import org.hibernate.type.SqlTypes;
-import org.json.JSONArray;
-import org.json.JSONObject;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
-import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.databind.JsonSerializable;
-import com.fasterxml.jackson.databind.SerializerProvider;
-import com.fasterxml.jackson.databind.jsontype.TypeSerializer;
-import com.mandarinaSolutions.impresiones3d.converter.ArticuloDimensionesConverter;
-import com.mandarinaSolutions.impresiones3d.converter.ArticuloImagenesConverter;
 
-import io.hypersistence.utils.hibernate.type.json.JsonType;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
-import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -32,6 +16,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
@@ -44,61 +29,77 @@ public class Articulo{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Getter @Setter
-	public Integer id;
+	public Integer id = null;
 
-	//CHEQUEAR EL <FetchType.EAGER>
-	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "articulo_categoria",
+	@ManyToMany(
+			fetch = FetchType.LAZY,
+			cascade = CascadeType.MERGE
+	)
+	@JoinTable(
+		name = "articulo_categoria",
 		joinColumns = @JoinColumn(name = "id_articulo"),
 		inverseJoinColumns = @JoinColumn(name = "id_categoria")
 	)
 	@Getter @Setter
-	public Set<Categoria> categorias;
+	public List<Categoria> categorias;
 	
-	//CHEQUEAR EL <FetchType.EAGER>
-	@ManyToMany(fetch = FetchType.LAZY)
+
+	@ManyToMany(
+			fetch = FetchType.LAZY,
+			cascade = CascadeType.MERGE
+	)
 	@JoinTable(name = "articulo_color",
 		joinColumns = @JoinColumn(name = "id_articulo"),
 		inverseJoinColumns = @JoinColumn(name = "id_color")
 	)
 	@Getter @Setter
 	public Set<Color> colores;
-
-	@Column(length=50)
+	
+	@OneToMany
+	@JoinColumn(name="articulo_id")
 	@Getter @Setter
+	public List<Dimension> dimensiones_mm;
+	
+	@OneToMany
+	@JoinColumn(name="articulo_id")
+	@Getter @Setter
+	public List<Imagen> imagenes;
+	
+	@Column(length=50)
 	public String titulo;
 
 	@Column(length=255)
-	@Getter @Setter
 	public String detalle;
 
-	@Column(length=50)
-	@Getter @Setter
-	public String imagen;
-	
-
 	@Column
-	@Convert(converter=ArticuloImagenesConverter.class)
-	@Getter @Setter
-	public List<String> imagenes_extra;
-
-	@Column
-	@Getter @Setter
 	public Double precio_lista;
 
 	@Column
-	@Getter @Setter
 	public Double descuento;
 	
 	@Column
-	@Convert(converter=ArticuloDimensionesConverter.class)
-	@Getter @Setter
-	public Map<String,String> dimensiones_mm;
-
-	@Column
-	@Getter @Setter
 	@JsonIgnore
-	public Boolean disponible;
+	public Boolean disponible = true;
 
+//	////////////////////////////////////
+//	GETTERS AND SETTERS SIMPLES
+//	////////////////////////////////////
+	public String getTitulo(){	return this.titulo;	};
+	public void setTitulo(String newTitulo){	this.titulo = newTitulo;	};
 
+	public String getDetalle(){	return this.detalle;	};
+	public void setDetalle(String newDetalle){	this.detalle= newDetalle;	};
+
+	public Double getPrecio(){	return this.precio_lista;	};
+	public void setPrecio(Double newPrecio){	this.precio_lista= newPrecio;	};
+	
+	public Double getDescuento(){	return this.descuento;	};
+	public void setDescuento(Double newDescuento){	this.descuento= newDescuento;	};
+	
+	public Boolean getDisponible(){	return this.disponible;	};
+	public void setDisponible(Boolean newDisponible){	this.disponible= newDisponible;	};
+	
+//	////////////////////////////////////
+//	GETTERS AND SETTERS con LOGICA
+//	////////////////////////////////////
 }

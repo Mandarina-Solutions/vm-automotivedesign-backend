@@ -4,20 +4,45 @@ package com.mandarinaSolutions.impresiones3d.querys;
 public class ArticuloQuerys {
 	
 	public static final String DISPONIBLE = """
-						SELECT a
-						FROM Articulo a
-						WHERE a.disponible=True
-						""";
+			SELECT 
+				a
+			FROM
+				Articulo a
+			WHERE
+				a.disponible=True
+			""";
+
 	public static final String CARRITO = """
-						SELECT
-						a.id, a.titulo, a.imagen_1, a.precio_lista, a.descuento
-						FROM articulo a 
-						WHERE a.id in :ids
-						""";
-	public static final String DIMENSIONES = """
-			SELECT small->‘$.dimensiones_mm’ AS dimensiones
-			FROM articulo
-			WHERE your_condition;
+			SELECT
+				a.id,
+				a.titulo,
+				a.precio_lista,
+				a.descuento,
+				i.path AS imagen
+			FROM
+				articulo a
+			JOIN
+				imagen i ON a.id = i.articulo_id
+			WHERE
+				a.id in :ids
+			""";
+	
+	public static final String MOCK = """
+			SELECT
+				a,
+				i.path AS imagen,
+				i.
+			FROM
+				articulo a
+			JOIN
+				imagen i ON a.id = i.articulo_id
+			WHERE
+				a.id in :ids
+			""";
+	
+	public static final String EXISTE_ARTICULO = """
+			SELECT a.id
+			FROM Articulo a
 			""";
 	
 }

@@ -3,7 +3,6 @@ package com.mandarinaSolutions.impresiones3d.controller;
 import java.util.List;
 import java.util.Set;
 
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -12,10 +11,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.mandarinaSolutions.impresiones3d.DTO.ArticuloCarritoDTO;
 import com.mandarinaSolutions.impresiones3d.dominio.Articulo;
+import com.mandarinaSolutions.impresiones3d.exceptions.HttpNotFoundException;
 import com.mandarinaSolutions.impresiones3d.services.ArticuloService;
 
 @RestController
@@ -35,7 +36,7 @@ public class ControllerArticulo {
 	};
 	
 	@GetMapping(basePath + "/{id}")
-	public Articulo getArticuloByID(@PathVariable Integer id) {
+	public Articulo getArticuloByID(@PathVariable Integer id) throws HttpNotFoundException {
 		return service.getByID(id);
 	}
 	
@@ -44,16 +45,17 @@ public class ControllerArticulo {
 		return service.getCarrito(ids);
 	};
 	
-//	@GetMapping(basePath + "/mock/{id}")
-//	public Object mock(@PathVariable Integer id) {
-//		return service.mock(id);
+//	@GetMapping(basePath + "/mock1/{id}")
+//	public Object mock1(@PathVariable Integer id) {
+//		return service.mock1(id);
 //	};
+
 	// //////////////////////////////////////////////
 	// POST`s	
 	// //////////////////////////////////////////////
 	//	falta agregregarle algun pathParam para chequear el logueo
 	@PostMapping(basePath + "/new")
-	public void newArticulo(@RequestBody Articulo articulo) {
+	public void newArticulo(@RequestBody Articulo articulo) throws Exception{
 		service.newArticulo(articulo);
 	}
 	

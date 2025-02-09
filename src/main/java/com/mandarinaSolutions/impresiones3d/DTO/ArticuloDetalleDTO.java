@@ -1,11 +1,13 @@
 //package com.mandarinaSolutions.impresiones3d.DTO;
 //
+//import java.util.List;
 //
 //public class ArticuloDetalleDTO {
 //
 //    public Integer id;
 //    public String titulo;
-//    public String imagenes;
+//    public String imagen;
+//    public List<String> imagenesExtra;
 //    public Double precio_lista;
 //    public Double descuento;
 //    

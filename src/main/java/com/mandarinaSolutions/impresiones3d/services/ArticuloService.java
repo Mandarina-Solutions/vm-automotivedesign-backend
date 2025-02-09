@@ -2,22 +2,16 @@ package com.mandarinaSolutions.impresiones3d.services;
 
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
-
-import org.apache.tomcat.util.json.JSONParser;
-import org.json.JSONArray;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mandarinaSolutions.impresiones3d.DTO.ArticuloCarritoDTO;
 import com.mandarinaSolutions.impresiones3d.dominio.Articulo;
+import com.mandarinaSolutions.impresiones3d.exceptions.HttpConflictExist;
+import com.mandarinaSolutions.impresiones3d.exceptions.HttpNotFoundException;
 import com.mandarinaSolutions.impresiones3d.repository.RepositoryArticulo;
+
+import jakarta.transaction.Transactional;
 
 
 @Service
@@ -36,28 +30,25 @@ public class ArticuloService {
 		return carrito;
 	}
 	
-	public Articulo getByID(Integer id) {
+	public Articulo getByID(Integer id) throws HttpNotFoundException {
+		if(!repo.existsById(id)) {
+			throw new HttpNotFoundException();
+		};
 		Articulo articulo = repo.findById(id).get();
 		return articulo;
 	}
-//	public Object mock(Integer id) {
+//	public Object mock1(Integer id) {
 //		Articulo articulo = repo.findById(id).get();
-//
-//		ObjectMapper objectMapper = new ObjectMapper();
-//		try {
-//			return objectMapper.readValue(
-//					articulo.imagenes_extra,
-//					new TypeReference<List<String>>(){}
-//			);
-//		} catch (JsonMappingException e) {
-//			return Map.of("error",e.toString());
-//		} catch (JsonProcessingException e) {
-//			return Map.of("error",e.toString());
-//		}
+//		return articulo.dimensiones_mm.toString();
 //	}
 	
-	public void newArticulo(Articulo articulo) {
-		repo.save(articulo);
+//	public Object mock2(Integer id) {
+//		return jsonLikeString;
+//	}
+//	
+//	@Transactional(Transactional.TxType.REQUIRED)
+	public void newArticulo(Articulo articuloNew) throws Exception{
+		repo.save(articuloNew);
 	}
 	
 	public void bajaFisica(Integer id) {
@@ -70,7 +61,7 @@ public class ArticuloService {
 	
 	public void bajaLogica(Integer id) {
 		Articulo articulo = repo.findById(id).get();
-//		articulo.disponibilidad = false;
+		articulo.setDisponible(false);
 		repo.save(articulo);
 	}
 	
