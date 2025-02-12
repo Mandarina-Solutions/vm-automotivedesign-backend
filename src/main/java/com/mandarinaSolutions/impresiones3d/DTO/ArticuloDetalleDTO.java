@@ -3,6 +3,7 @@ package com.mandarinaSolutions.impresiones3d.DTO;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.mandarinaSolutions.impresiones3d.dominio.Categoria;
 import com.mandarinaSolutions.impresiones3d.dominio.Color;
 
@@ -17,6 +18,9 @@ public class ArticuloDetalleDTO {
     public List<Color> colores;
     public ArrayList<DimensionDTO> dimensiones_mm = new ArrayList<DimensionDTO>();
     public ArrayList<String> imagenes = new ArrayList<String>();
+    
+    @JsonIgnore
+    private String path = "../src/assets/";
     
     public ArticuloDetalleDTO(
     		Integer id,
@@ -42,6 +46,10 @@ public class ArticuloDetalleDTO {
 
     public void addImagen(String imagen) {
     	this.imagenes.add(imagen);
+    }
+    
+    public String getPath() {
+    	return this.path;
     }
 }
 

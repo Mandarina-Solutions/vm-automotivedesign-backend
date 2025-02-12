@@ -1,5 +1,6 @@
 package com.mandarinaSolutions.impresiones3d.DTO;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class ArticuloBasicoDTO {
 
@@ -8,6 +9,9 @@ public class ArticuloBasicoDTO {
     public Double precio_lista;
     public Double descuento;
     public String imagen;
+    
+    @JsonIgnore
+    public String path = "../src/assets/";
     
     public ArticuloBasicoDTO(
     		Integer id,
@@ -20,8 +24,9 @@ public class ArticuloBasicoDTO {
         this.titulo = titulo;
         this.precio_lista = precio_lista;
         this.descuento = descuento;
-        this.imagen = imagen;
+        this.imagen = this.path + imagen;
     }
-
+    
+    
 }
 

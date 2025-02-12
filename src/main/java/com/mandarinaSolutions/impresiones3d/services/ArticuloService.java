@@ -127,7 +127,7 @@ public class ArticuloService {
 		}
 		for(int i = 0; i<articulo.imagenes.size();i++) {
 			String imagenPath = articulo.imagenes.get(i).path;
-			articuloDTO.addImagen(imagenPath);
+			articuloDTO.addImagen(articuloDTO.getPath() + imagenPath);
 		}
 	    return articuloDTO;
 	}
