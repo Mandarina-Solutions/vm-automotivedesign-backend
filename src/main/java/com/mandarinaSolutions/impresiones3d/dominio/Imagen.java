@@ -21,7 +21,7 @@ public class Imagen{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Getter @Setter
-	public Integer id;
+	public Integer id = null;
 	
 	@Column
 	@Getter @Setter
@@ -31,5 +31,5 @@ public class Imagen{
 	@Getter @Setter
 	public String path;
 
-
+	
 }

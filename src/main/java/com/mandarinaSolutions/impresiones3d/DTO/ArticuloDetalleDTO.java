@@ -1,29 +1,47 @@
-//package com.mandarinaSolutions.impresiones3d.DTO;
-//
-//import java.util.List;
-//
-//public class ArticuloDetalleDTO {
-//
-//    public Integer id;
-//    public String titulo;
-//    public String imagen;
-//    public List<String> imagenesExtra;
-//    public Double precio_lista;
-//    public Double descuento;
-//    
-//    public ArticuloDetalleDTO(
-//    		Integer id,
-//    		String titulo,
-//    		String imagen,
-//    		Double precio_lista,
-//    		Double descuento
-//    ){
-//        this.id = id;
-//        this.titulo = titulo;
-//        this.imagen = imagen;
-//        this.precio_lista = precio_lista;
-//        this.descuento = descuento;
-//    }
-//
-//}
-//
+package com.mandarinaSolutions.impresiones3d.DTO;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import com.mandarinaSolutions.impresiones3d.dominio.Categoria;
+import com.mandarinaSolutions.impresiones3d.dominio.Color;
+
+public class ArticuloDetalleDTO {
+
+    public Integer id;
+    public String titulo;
+    public String detalle;
+    public Double precio_lista;
+    public Double descuento;
+    public List<Categoria> categorias;
+    public List<Color> colores;
+    public ArrayList<DimensionDTO> dimensiones_mm = new ArrayList<DimensionDTO>();
+    public ArrayList<String> imagenes = new ArrayList<String>();
+    
+    public ArticuloDetalleDTO(
+    		Integer id,
+    		String titulo,
+    		String detalle,
+    		Double precio_lista,
+    		Double descuento,
+    	    List<Categoria> categorias,
+    	    List<Color> colores
+    ){
+        this.id = id;
+        this.titulo = titulo;
+        this.detalle= detalle;
+        this.precio_lista = precio_lista;
+        this.descuento = descuento;
+        this.categorias = categorias;
+        this.colores = colores;
+    }
+
+    public void addDimensionDTO(DimensionDTO dimensionDTO) {
+    	this.dimensiones_mm.add(dimensionDTO);
+    }
+
+    public void addImagen(String imagen) {
+    	this.imagenes.add(imagen);
+    }
+}
+

@@ -9,9 +9,5 @@ import com.mandarinaSolutions.impresiones3d.dominio.Categoria;
 
 
 public interface RepositoryCategoria extends JpaRepository<Categoria, Integer> {
-	
-//	@Override
-//	@EntityGraph(attributePaths={"articulos"})
-//	List<Categoria> findAll();
-	
+		
 }

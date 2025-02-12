@@ -27,22 +27,20 @@ public class ArticuloQuerys {
 				a.id in :ids
 			""";
 	
-	public static final String MOCK = """
+	public static final String HOME = """
 			SELECT
-				a,
-				i.path AS imagen,
-				i.
+				a.id,
+				a.titulo,
+				a.precio_lista,
+				a.descuento,
+				i.path AS imagen
 			FROM
 				articulo a
 			JOIN
 				imagen i ON a.id = i.articulo_id
-			WHERE
-				a.id in :ids
+			WHERE 
+				a.disponible = True
 			""";
-	
-	public static final String EXISTE_ARTICULO = """
-			SELECT a.id
-			FROM Articulo a
-			""";
+
 	
 }

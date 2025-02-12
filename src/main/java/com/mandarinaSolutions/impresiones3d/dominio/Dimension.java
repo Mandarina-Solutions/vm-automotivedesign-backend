@@ -22,10 +22,11 @@ public class Dimension{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Getter @Setter
-	public Integer id;
+	public Integer id = null;
 
 	@Column
 	@Getter @Setter
+	
 	public Integer articulo_id;
 	
 	@Column

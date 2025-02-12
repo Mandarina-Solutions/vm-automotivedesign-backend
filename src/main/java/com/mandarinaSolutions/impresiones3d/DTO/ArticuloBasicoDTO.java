@@ -1,7 +1,7 @@
 package com.mandarinaSolutions.impresiones3d.DTO;
 
 
-public class ArticuloCarritoDTO {
+public class ArticuloBasicoDTO {
 
     public Integer id;
     public String titulo;
@@ -9,7 +9,7 @@ public class ArticuloCarritoDTO {
     public Double descuento;
     public String imagen;
     
-    public ArticuloCarritoDTO(
+    public ArticuloBasicoDTO(
     		Integer id,
     		String titulo,
     		Double precio_lista,

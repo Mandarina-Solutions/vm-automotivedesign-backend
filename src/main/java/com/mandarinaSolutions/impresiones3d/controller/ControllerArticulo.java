@@ -11,12 +11,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.mandarinaSolutions.impresiones3d.DTO.ArticuloCarritoDTO;
+import com.mandarinaSolutions.impresiones3d.DTO.ArticuloBasicoDTO;
+import com.mandarinaSolutions.impresiones3d.DTO.ArticuloDetalleDTO;
 import com.mandarinaSolutions.impresiones3d.dominio.Articulo;
-import com.mandarinaSolutions.impresiones3d.exceptions.HttpNotFoundException;
+import com.mandarinaSolutions.impresiones3d.exceptions.ArticuloNotFoundException;
 import com.mandarinaSolutions.impresiones3d.services.ArticuloService;
 
 @RestController
@@ -31,17 +31,17 @@ public class ControllerArticulo {
 	//GET`s	
 	// //////////////////////////////////////////////
 	@GetMapping(basePath)
-	public Set<Articulo> getArticulos() {
+	public Set<ArticuloBasicoDTO> getArticulos() {
 		return service.getAll();
 	};
 	
 	@GetMapping(basePath + "/{id}")
-	public Articulo getArticuloByID(@PathVariable Integer id) throws HttpNotFoundException {
+	public ArticuloDetalleDTO getArticuloByID(@PathVariable Integer id) throws ArticuloNotFoundException {
 		return service.getByID(id);
 	}
 	
 	@GetMapping(basePath + "/carrito")
-	public List<ArticuloCarritoDTO> getCarrito(@RequestBody List<Integer> ids) {
+	public List<ArticuloBasicoDTO> getCarrito(@RequestBody List<Integer> ids) {
 		return service.getCarrito(ids);
 	};
 	
@@ -79,7 +79,7 @@ public class ControllerArticulo {
 	
 	@PutMapping(basePath + "/update/{id}")
 	public void updateDisponibilidad(@PathVariable Integer id) {
-		service.bajaLogica(id);
+		service.updateDisponibilidad(id);
 	}
 	
 }
