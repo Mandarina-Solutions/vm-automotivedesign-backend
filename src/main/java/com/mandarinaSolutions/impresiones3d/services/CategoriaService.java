@@ -33,4 +33,8 @@ public class CategoriaService {
 	public void updateCategoria(Categoria categoria) {
 		repo.save(categoria);
 	}
+
+	public List<Categoria> getCategoriasNav() {
+		return repo.getCategoriasNav();
+	}
 }

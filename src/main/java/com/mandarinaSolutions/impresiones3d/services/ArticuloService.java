@@ -50,6 +50,7 @@ public class ArticuloService {
 			throw new ArticuloNotFoundException();
 		};
 		Articulo articulo = repo.findById(id).get();
+
 		return this.mapToArticuloDetalleDTO(articulo);
 	}
 
