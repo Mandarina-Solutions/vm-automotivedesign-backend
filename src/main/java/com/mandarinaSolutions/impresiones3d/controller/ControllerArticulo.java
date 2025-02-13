@@ -20,7 +20,7 @@ import com.mandarinaSolutions.impresiones3d.exceptions.ArticuloNotFoundException
 import com.mandarinaSolutions.impresiones3d.services.ArticuloService;
 
 @RestController
-@CrossOrigin(origins = {"http://localhost:8080", "http://localhost:5173"})
+@CrossOrigin(origins = {"http://localhost:8080", "http://localhost:5173", "http://localhost:5174"})
 public class ControllerArticulo {
 	
 	@Autowired

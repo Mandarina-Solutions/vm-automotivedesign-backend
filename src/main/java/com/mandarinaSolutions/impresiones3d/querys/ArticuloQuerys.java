@@ -41,6 +41,4 @@ public class ArticuloQuerys {
 			WHERE 
 				a.disponible = True
 			""";
-
-	
 }
