@@ -45,11 +45,6 @@ public class ControllerArticulo {
 		return service.getCarrito(ids);
 	};
 	
-//	@GetMapping(basePath + "/mock1/{id}")
-//	public Object mock1(@PathVariable Integer id) {
-//		return service.mock1(id);
-//	};
-
 	// //////////////////////////////////////////////
 	// POST`s	
 	// //////////////////////////////////////////////

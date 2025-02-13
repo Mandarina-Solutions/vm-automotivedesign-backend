@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import com.mandarinaSolutions.impresiones3d.DTO.ArticuloBasicoDTO;
 import com.mandarinaSolutions.impresiones3d.dominio.Categoria;
 import com.mandarinaSolutions.impresiones3d.services.CategoriaService;
 
@@ -15,11 +16,18 @@ public class ControllerCategoria {
 	@Autowired
 	private CategoriaService service;
 	
-	@GetMapping("categorias")
+	private static final String basePath = "categorias";
+	
+	@GetMapping(basePath)
 	public List<Categoria> obtenerCategorias() {
 		return service.getCategorias();
 	}
 
 	@GetMapping("categorias_nav")
 	public  List<Categoria> getCategoriasNav() {return service.getCategoriasNav();}
+	
+	@GetMapping(basePath + "/disponibles")
+	public List<Categoria> getDisponibles() {
+		return service.getCategoriasNav();
+	};
 }
