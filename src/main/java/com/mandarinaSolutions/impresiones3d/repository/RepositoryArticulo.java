@@ -2,31 +2,35 @@ package com.mandarinaSolutions.impresiones3d.repository;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.NativeQuery;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.jpa.repository.EntityGraph;
+
+import com.mandarinaSolutions.impresiones3d.DTO.ArticuloBasicoDTO;
 import com.mandarinaSolutions.impresiones3d.dominio.Articulo;
+import com.mandarinaSolutions.impresiones3d.querys.ArticuloQuerys;
 
 
 public interface RepositoryArticulo extends JpaRepository<Articulo, Integer> {
 	
+	@NativeQuery(value = ArticuloQuerys.HOME)
+	List<ArticuloBasicoDTO> getAll();
+	
 	//ESTO ES PARA EVITAR LAS n+1 QUERYS.
 	//	@EntityGraph()
 	//	Una query para la entidad, otra query para la tabla intermedia. 
-	//	Asi para cada entrada de la tabla	
+	//	Asi para cada entrada de la tabla
 	@Override
-	@EntityGraph(attributePaths={"colores", "categorias"})
-	List<Articulo> findAll();
-	
-	@Override
-	@EntityGraph(attributePaths={"colores", "categorias"})
+	@EntityGraph(attributePaths={"colores", "categorias", "dimensiones_mm", "imagenes"})
 	Optional<Articulo> findById(Integer id);
 	
-	//	SI SE HACE
-	//	@ManyToMany(fetch=FetchType.EAGER) no hace falta esta query. PREGUNTAR
-	//	MOCK PARA CHUSMEAS Y METER COPY PASTE
+	@NativeQuery(value = ArticuloQuerys.CARRITO)
+	List<ArticuloBasicoDTO> getCarrito(List<Integer> ids);
+	
+
 //	@Query("SELECT a FROM Articulo a JOIN FETCH a.colores JOIN FETCH a.categorias")
 //	Set<Articulo> getAll();
 }
+
