@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.mandarinaSolutions.impresiones3d.DTO.ArticuloBasicoDTO;
@@ -38,13 +39,17 @@ public class ControllerArticulo {
 	@GetMapping(basePath + "/{id}")
 	public ArticuloDetalleDTO getArticuloByID(@PathVariable Integer id) throws ArticuloNotFoundException {
 		return service.getByID(id);
-	}
+	};
 	
 	@GetMapping(basePath + "/carrito")
 	public List<ArticuloBasicoDTO> getCarrito(@RequestBody List<Integer> ids) {
 		return service.getCarrito(ids);
 	};
 	
+	@GetMapping(basePath + "/filter")
+	public List<ArticuloBasicoDTO> getArticulosByFilter(@RequestParam String filter) {
+		return service.getByFilter(filter);
+	};
 	// //////////////////////////////////////////////
 	// POST`s	
 	// //////////////////////////////////////////////
@@ -52,7 +57,7 @@ public class ControllerArticulo {
 	@PostMapping(basePath + "/new")
 	public void newArticulo(@RequestBody Articulo articulo) throws Exception{
 		service.newArticulo(articulo);
-	}
+	};
 	
 	// //////////////////////////////////////////////
 	// DELETE`s	
