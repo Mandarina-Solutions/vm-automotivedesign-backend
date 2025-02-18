@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.NativeQuery;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.data.jpa.repository.EntityGraph;
 
 import com.mandarinaSolutions.impresiones3d.DTO.ArticuloBasicoDTO;
@@ -29,6 +30,8 @@ public interface RepositoryArticulo extends JpaRepository<Articulo, Integer> {
 	@NativeQuery(value = ArticuloQuerys.CARRITO)
 	List<ArticuloBasicoDTO> getCarrito(List<Integer> ids);
 	
+	@NativeQuery(value = ArticuloQuerys.FILTER)
+	List<ArticuloBasicoDTO> getByFilter(@Param("filter") String filter);	
 
 //	@Query("SELECT a FROM Articulo a JOIN FETCH a.colores JOIN FETCH a.categorias")
 //	Set<Articulo> getAll();

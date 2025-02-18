@@ -53,7 +53,12 @@ public class ArticuloService {
 
 		return this.mapToArticuloDetalleDTO(articulo);
 	}
-
+	
+	public List<ArticuloBasicoDTO> getByFilter(String filter) throws ArticuloNotFoundException {
+		List<ArticuloBasicoDTO> articulosFiltrados = repo.getByFilter(filter);
+		return articulosFiltrados;
+	}
+	
 	public void newArticulo(Articulo articulo) throws Exception{
 //		CONDICIONES INICIALES
 //		Los campos categorias, colores, imagenes, dimensiones, titulo y precio, OBLIGATORIOS
