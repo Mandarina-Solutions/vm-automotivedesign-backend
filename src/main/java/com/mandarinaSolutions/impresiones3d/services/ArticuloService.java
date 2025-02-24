@@ -55,8 +55,13 @@ public class ArticuloService {
 	}
 	
 	public List<ArticuloBasicoDTO> getByFilter(String filter) throws ArticuloNotFoundException {
-		List<ArticuloBasicoDTO> articulosFiltrados = repo.getByFilter(filter);
-		return articulosFiltrados;
+		List<ArticuloBasicoDTO> articulosPorFiltro = repo.getByFilter(filter);
+		return articulosPorFiltro;
+	}
+	
+	public List<ArticuloBasicoDTO> getByCategoria(String categoria) throws ArticuloNotFoundException {
+		List<ArticuloBasicoDTO> articulosPorCategoria = repo.getByCategoria(categoria);
+		return articulosPorCategoria;
 	}
 	
 	public void newArticulo(Articulo articulo) throws Exception{

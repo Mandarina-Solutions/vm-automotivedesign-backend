@@ -31,7 +31,10 @@ public interface RepositoryArticulo extends JpaRepository<Articulo, Integer> {
 	List<ArticuloBasicoDTO> getCarrito(List<Integer> ids);
 	
 	@NativeQuery(value = ArticuloQuerys.FILTER)
-	List<ArticuloBasicoDTO> getByFilter(@Param("filter") String filter);	
+	List<ArticuloBasicoDTO> getByFilter(@Param("filter") String filter);
+	
+	@NativeQuery(value = ArticuloQuerys.CATEGORIA)
+	List<ArticuloBasicoDTO> getByCategoria(@Param("categoria") String categoria);
 
 //	@Query("SELECT a FROM Articulo a JOIN FETCH a.colores JOIN FETCH a.categorias")
 //	Set<Articulo> getAll();

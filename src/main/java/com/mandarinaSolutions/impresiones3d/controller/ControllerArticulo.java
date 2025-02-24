@@ -50,6 +50,11 @@ public class ControllerArticulo {
 	public List<ArticuloBasicoDTO> getArticulosByFilter(@RequestParam String filter) {
 		return service.getByFilter(filter);
 	};
+	
+	@GetMapping(basePath + "/categoria")
+	public List<ArticuloBasicoDTO> getArticulosByCategoria(@RequestParam String categoria) {
+		return service.getByCategoria(categoria);
+	};
 	// //////////////////////////////////////////////
 	// POST`s	
 	// //////////////////////////////////////////////

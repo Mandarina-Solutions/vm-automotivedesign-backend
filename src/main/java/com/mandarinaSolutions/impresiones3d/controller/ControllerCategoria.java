@@ -18,11 +18,6 @@ public class ControllerCategoria {
 	
 	private static final String basePath = "categorias";
 	
-	@GetMapping(basePath)
-	public List<Categoria> obtenerCategorias() {
-		return service.getCategorias();
-	}
-
 	@GetMapping("categorias_nav")
 	public  List<Categoria> getCategoriasNav() {return service.getCategoriasNav();}
 	

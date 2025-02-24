@@ -7,8 +7,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import lombok.Getter;
-import lombok.Setter;
 
 @Entity
 @Table(name = "categoria")
@@ -16,11 +14,14 @@ public class Categoria {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Getter @Setter
-	public Integer id;
+	private Integer id;
 	
 	@Column(length=50, unique=true)
-	@Getter @Setter
-	public String nombre;
+	private String nombre;
 	
+	public Integer getId(){	return this.id;	}
+	public void setId(Integer newId) {	this.id = newId;	}
+
+	public String getNombre(){	return this.nombre;	}
+	public void setNombre(String newNombre) {	this.nombre = newNombre;	}
 }
