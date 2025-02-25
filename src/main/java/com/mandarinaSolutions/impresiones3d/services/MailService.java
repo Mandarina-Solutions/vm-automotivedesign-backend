@@ -23,6 +23,7 @@ public class MailService {
 		sb.append("Gracias por elejirnos, tus productos seleccionados fueron: \n\n");
 		
 		for(var item : request.getCartItems()) {
+			sb.append("Lista de productos: \n\n");
 			sb.append("Producto: ").append(item.getTitulo()).append("\n")
 			.append("Cantidad: ").append(item.getCantidad()).append("\n")
 			.append("Color: ").append(item.getColor()).append("\n")
@@ -31,7 +32,14 @@ public class MailService {
 		}
 		
 		sb.append("Total: ").append(request.getTotal()).append("\n\n");
-		sb.append("Para confirmar tu pedido, transfiere el total al siguiente alias: Diego el piola\n");
+		
+		sb.append("Para confirmar tu pedido, completa los datos para coordinar la entrega\n");
+		sb.append("Provincia: #completar \n")
+		.append("Ciudad: #completar \n")
+		.append("Calle y numeracion: #completar \n")
+		.append("Codigo postal: #completar \n")
+		.append("Telefono: #opcional \n");
+		
 		
 		message.setText(sb.toString());
 		mailSender.send(message);
